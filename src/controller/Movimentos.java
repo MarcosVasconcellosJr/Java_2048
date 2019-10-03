@@ -44,15 +44,8 @@ public class Movimentos extends Jogo2048 {
                         return true;
 
                     super.caixinha[proxLinha][proxColuna] = atual;//A proxima posição que esta vazia recebera o valor da atual da anterior a ela
-                    
-                    super.repaint();
-                   
-
                     super.caixinha[linha][coluna] = null;//A posição anterior recebera NULL
-                    System.out.println("Repaint");
-                    super.repaint();
-                   
-                                        
+                    
                     //Andar com as posições
                     linha = proxLinha;
                     coluna = proxColuna;
@@ -79,7 +72,9 @@ public class Movimentos extends Jogo2048 {
                     break;
             }
         }
-
+        
+        
+        
         if (moved==true) {
             if (super.recorde < super.objetivo) {
                 limparMescladas();//Limpa as caixinhas que ja foram mescladas com outras
@@ -90,38 +85,42 @@ public class Movimentos extends Jogo2048 {
             } else if (super.recorde == super.objetivo)//Verifica se tem alguma caixinha com o valor 2048, caso tenha venceu o Jogo.
                 super.statusDoJogo = "usuarioGanhou";
         }
-
+        
         return moved;
     }
 
     //Função que verifica se cada uma das caixinhas é null se for seta o atributo mesclado delas como false
     public void limparMescladas() {
-        for (Caixinha[] row : super.caixinha)
-            for (Caixinha tile : row)
-                if (tile != null)
-                    tile.setMesclada(false);
+        for (Caixinha[] linha : super.caixinha)
+            for (Caixinha caixa : linha)
+                if (caixa != null)
+                    caixa.setMesclada(false);
     }
 
     public boolean temMovimentos() {
         super.temMovimentosPossiveis = true;
-        boolean hasMoves = moveUp() || moveDown() || moveLeft() || moveRight();
+        boolean temMovimento = moveUp() || moveDown() || moveLeft() || moveRight();
         super.temMovimentosPossiveis = false;
-        return hasMoves;
+        return temMovimento;
     }
 
     public boolean moveUp() {
+        super.troca(super.caixinhaEstadoAnterior, super.caixinha, 2); //Vai dar pra a tudo que tem em b
         return move(0, 0, -1);
     }
 
     public boolean moveDown() {
+        //super.troca(super.caixinhaEstadoAnterior, super.caixinha, 2); //Vai dar pra a tudo que tem em b
         return move(super.tam * super.tam - 1, 0, 1);
     }
 
     public boolean moveLeft() {
+        //super.troca(super.caixinhaEstadoAnterior, super.caixinha, 2); //Vai dar pra a tudo que tem em b
         return move(0, -1, 0);
     }
 
     public boolean moveRight() {
+        super.troca(super.caixinhaEstadoAnterior, super.caixinha, 2); //Vai dar pra a tudo que tem em b
         return move(super.tam * super.tam - 1, 1, 0);
     }
 

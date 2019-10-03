@@ -41,7 +41,7 @@ import static sun.security.krb5.Confounder.bytes;
 // programa e chama outras classes e métodos
 public class Jogo2048 extends JPanel {
     
-    String arq = "src\\assets\\maximumhighScore.txt";
+    String arq = "src\\model\\maximumhighScore.txt";
     
     final Color[] tabelaDeCores = {new Color(0x701710), new Color(0xFFE4C3), new Color(0xfff4d3), new Color(0xffdac3),
         new Color(0xE7B08E), new Color(0xE7BF8E), new Color(0xffc4c3), new Color(0xE7948e), new Color(0xbe7e56),
@@ -59,11 +59,14 @@ public class Jogo2048 extends JPanel {
     public Color blocosCabecalho = new Color(0xEBEBEB);
 
     public static Caixinha[][] caixinha; // Declaração da matriz que será usada para toda a lógica do joguinho
+    public static Caixinha[][] caixinhaEstadoAnterior;
     public int tam = 4; // usada para declarar as dimensões da matriz
 
     public static String statusDoJogo = "inicio"; // usada para tomar ações dependendo do status atual que o usuário está
     public boolean temMovimentosPossiveis; // Usada para fazer a verificação dos movimentos para os 4 lados.
     public Movimentos mover;
+    public boolean jaDesfez = false;
+    public boolean jaRefez = false;
     
     public static String conteudo = "";
     
@@ -85,7 +88,6 @@ public class Jogo2048 extends JPanel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-
                 clicouEmX = e.getX();
                 clicouEmY = e.getY();
             }
@@ -147,13 +149,24 @@ public class Jogo2048 extends JPanel {
         });
     }
 
+    private Jogo2048(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String Jogo2048(int Status) {
+        if(Status == 1){
+            return statusDoJogo;
+        }
+        return null;
+    }
+    
     @Override
     public void paintComponent(Graphics gg) {
         super.paintComponent(gg);
         Graphics2D g = (Graphics2D) gg;
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         try {
-            drawGrid(g);
+            printaGradeDeCaixinhas(g);
         } catch (IOException ex) {
             Logger.getLogger(Jogo2048.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -165,6 +178,7 @@ public class Jogo2048 extends JPanel {
             recorde = 0;
             statusDoJogo = "usuarioJogando";
             caixinha = new Caixinha[tam][tam];
+            caixinhaEstadoAnterior = new Caixinha[tam][tam];
             mover = new Movimentos();
             addCaixinhaRandomica();
             addCaixinhaRandomica();
@@ -178,68 +192,64 @@ public class Jogo2048 extends JPanel {
             soltouEmX = e.getX();
             soltouEmY = e.getY();
             dX = (soltouEmX - clicouEmX);
-            dY = (soltouEmY - clicouEmY);
-
-            //System.out.println("click x: " + clicouEmX + " clickY: " + clicouEmY + "\nexitX: " + soltouEmX + " exitY: " + soltouEmY);
-
-            if (dX < 0 && dY < 0) {
-                dX = (dX * (-1));
-                dY = (dY * (-1));
-                if (dX > dY) {
-                    System.out.println("Esquerda");
-                    mover.moveLeft();
-                    dX = (dX * (-1));
-                    dY = (dY * (-1));
-                } else {
-                    System.out.println("Cima");
-                    mover.moveUp();
-                    dX = (dX * (-1));
-                    dY = (dY * (-1));
+            dY = (soltouEmY - clicouEmY)*(-1);
+            //Botões Desfazer e refazer
+            if (clicouEmX > 215 && clicouEmX < 275 && clicouEmY > 30 && clicouEmY < 80 ){
+                if(jaDesfez == false){
+                    troca(caixinhaEstadoAnterior, caixinha, 1);
+                    jaDesfez = true;
+                    jaRefez = false;
+                }
+            }
+            if (clicouEmX > 290 && clicouEmX < 350 && clicouEmY > 30 && clicouEmY < 80 ){
+                if(jaRefez == false){
+                    troca(caixinhaEstadoAnterior, caixinha, 1);
+                    jaRefez = true;
+                    jaDesfez = false;
                 }
             }
 
-            if (dX > 0 && dY < 0) {
-                dY = (dY * (-1));
-
-                if (dX > dY) {
-                    System.out.println("Direita");
-                    mover.moveRight();
-                    dY = (dY * (-1));
-
-                } else {
-                    System.out.println("Cima");
-                    mover.moveUp();
-                    dY = (dY * (-1));
-                }
-            }
-
+            //1 quadrante
             if (dX > 0 && dY > 0) {
-                if (dX > dY) {
-                    mover.moveRight();
-                } else {
-                    mover.moveDown();
-                }
+                if (Math.abs(dX) > Math.abs(dY)) mover.moveRight();
+                else mover.moveUp();
             }
-
+            //2 quadrante
             if (dX < 0 && dY > 0) {
-                dX = (dX * (-1));
-
-                if (dX > dY) {
-                    System.out.println("Esquerda");
-                    mover.moveLeft();
-                    dX = (dX * (-1));
-
-                } else {
-                    System.out.println("Baixo");
-                    mover.moveDown();
-                    dX = (dX * (-1));
-                }
+                if (Math.abs(dX) > Math.abs(dY)) mover.moveLeft();
+                else mover.moveUp();
             }
-        } catch (java.lang.NullPointerException e1) {
+            //3 quadrante
+            if (dX < 0 && dY < 0) {
+                if (Math.abs(dX) < Math.abs(dY)) mover.moveDown();
+                else mover.moveLeft();
+            }         
+            //4 quadrante
+            if (dX > 0 && dY < 0) {
+                if (Math.abs(dX) > Math.abs(dY)) mover.moveRight();
+                else mover.moveDown();
+            }
+        } catch (java.lang.NullPointerException el) {
+            System.out.println("Impossível lidar com teclado, falha de sistema");
         }
     }
-
-    public void drawGrid(Graphics2D g) throws IOException {
+    public void troca(Caixinha[][] a, Caixinha[][] b, int func){
+        Caixinha swap;
+        for (int linha = 0; linha < tam; linha++) {
+            for (int coluna = 0; coluna < tam; coluna++) {
+                if(func == 1){
+                    swap = a[linha][coluna];
+                    a[linha][coluna] = b[linha][coluna];
+                    b[linha][coluna] = swap;
+                }//Func 1 faz a trocar com b
+                if(func == 2){
+                    a[linha][coluna] = b[linha][coluna];
+                }//Func 2 faz a = b
+                
+            }
+        }
+    }
+    public void printaGradeDeCaixinhas(Graphics2D g) throws IOException {
         // Desenha o container e o cabecalho
         g.setColor(caixaCor);
         g.fillRoundRect(200, 100, 500, 500, 25, 25);
@@ -249,9 +259,13 @@ public class Jogo2048 extends JPanel {
         // Blocos de desfazer
         g.setColor(blocosCabecalho);
         g.fillRoundRect(215, 30, 60, 50, 25, 25);
+        BufferedImage desfazer = ImageIO.read(getClass().getResourceAsStream("/assets/desfazer.png"));
+        g.drawImage(desfazer, 230, 40, 30, 30, null);
+            
         g.setColor(blocosCabecalho);
         g.fillRoundRect(290, 30, 60, 50, 25, 25);
-
+        BufferedImage refazer = ImageIO.read(getClass().getResourceAsStream("/assets/refazer.png"));
+        g.drawImage(refazer, 305, 40, 30, 30, null);
         // Blocos de Score atual e HighScore
         // Desenha o score do usuário
         g.setColor(blocosCabecalho);
@@ -264,26 +278,20 @@ public class Jogo2048 extends JPanel {
         g.setColor(blocosCabecalho);
         g.fillRoundRect(530, 30, 150, 50, 25, 25);
         g.setColor(textos);
-        // g.setFont(new Font("SansSerif", Font.BOLD, 20));
-        
+        g.setFont(new Font("SansSerif", Font.BOLD, 20));
+        //Lê o arquivo e mostra o maior valor já feito no histórico do programa
         s = Arquivos.Read(arq);
         conteudo = Arquivos.Read(arq);
-        //System.out.println(conteudo);
         double c = Double.parseDouble(conteudo);
-
-        
+        g.setFont(new Font("SansSerif", Font.BOLD, 17));
         if(pontos >= c){
             Arquivos.Write(arq, Integer.toString(pontos));
             String l = Integer.toString(pontos);
             g.drawString("HighScore: " + l, 540, 63);
         }else{
-        
             g.drawString("HighScore: " + s, 540, 63);
-
         }
-        
-      
-
+       
         if (statusDoJogo == "usuarioJogando") {
             for (int linha = 0; linha < tam; linha++) {
                 for (int coluna = 0; coluna < tam; coluna++) {
@@ -292,7 +300,7 @@ public class Jogo2048 extends JPanel {
                         g.fillRoundRect(215 + coluna * 121, 115 + linha * 121, 106, 106, 25, 25);
                     } else {
                         g.setFont(new Font("SansSerif", Font.BOLD, 40));
-                        drawTile(g, linha, coluna);
+                        printaCaixinhas(g, linha, coluna);
                     }
                 }
             }
@@ -316,15 +324,16 @@ public class Jogo2048 extends JPanel {
                     g.setColor(caixaCor);
 
                     g.setFont(new Font("SansSerif", Font.BOLD, 20));
-                    g.drawString("Pressione enter para continuar", 300, 470);
-                    g.drawString("Você pode usar as setas para jogar", 280, 530);
+                    g.drawString("Pressione enter para continuar", 300, 250);
+                    g.drawString("As setas para jogar", 355, 450);
+                    g.drawString("O mouse para jogar", 355, 480);
+                    g.drawString("W,A,S,D para jogar", 357, 510);
                     break;
-                    
             }
         }
     }
 
-    public void drawTile(Graphics2D g, int linha, int coluna) throws IOException {
+    public void printaCaixinhas(Graphics2D g, int linha, int coluna) throws IOException {
         int value = caixinha[linha][coluna].pegaValor();
         g.setColor(tabelaDeCores[(int) (Math.log(value) / Math.log(2)) + 1]);
         g.fillRoundRect(215 + coluna * 121, 115 + linha * 121, 106, 106, 25, 25);
@@ -338,46 +347,13 @@ public class Jogo2048 extends JPanel {
         int asc = fm.getAscent();
         int dec = fm.getDescent();
 
-        //int x = 215 + coluna * 121 + (106 - fm.stringWidth(s)) / 2;
-        //int y = 115 + linha * 121 + (asc + (106 - (asc + dec)) / 2);
-        int x = 175 + coluna * 121 + (106 - fm.stringWidth(s)) / 2;
-        int y = 50 + linha * 121 + (asc + (106 - (asc + dec)) / 2);
-        Image icon = new ImageIcon(getClass().getResource("/assets/giphy.gif")).getImage();
-
-        if(value==2){
-        BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/2.png"));
-        g.drawImage(imagem_2, x, y, 100, 100, null);
-        }else if(value==4){
-            BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/4.png"));
-            g.drawImage(icon, x, y, 100, 100, this);
-        }else if(value==8){
-            BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/8.png"));
-            g.drawImage(imagem_2, x, y, 100, 100, null);
-        }else if(value==16){
-            BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/16.png"));
-            g.drawImage(imagem_2, x, y, 100, 100, null);
-        }else if(value==32){
-            BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/32.png"));
-            g.drawImage(imagem_2, x, y, 100, 100, null);
-        }else if(value==64){
-            BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/64.png"));
-            g.drawImage(imagem_2, x, y, 100, 100, null);
-        }else if(value==128){
-            BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/128.png"));
-            g.drawImage(imagem_2, x, y, 100, 100, null);
-        }else if(value==256){
-            BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/256.png"));
-            g.drawImage(imagem_2, x, y, 100, 100, null);
-        }else if(value==512){
-            BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/512.png"));
-            g.drawImage(imagem_2, x, y, 100, 100, null);
-        }else if(value==1024){
-            BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/1024.png"));
-            g.drawImage(imagem_2, x, y, 100, 100, null);
-        }else if(value==2048){
-            BufferedImage imagem_2 = ImageIO.read(getClass().getResourceAsStream("/assets/2048.png"));
-            g.drawImage(imagem_2, x, y, 100, 100, null);
-        }
+        int x = 215 + coluna * 121 + (106 - fm.stringWidth(s)) / 2;
+        int y = 115 + linha * 121 + (asc + (106 - (asc + dec)) / 2);
+        g.drawString(s, x, y);
+        
+        //int x = 175 + coluna * 121 + (106 - fm.stringWidth(s)) / 2;
+        //int y = 50 + linha * 121 + (asc + (106 - (asc + dec)) / 2);
+       
     }
 
     // Função faz o trabalho exclusivo de adicionar uma caixinha
