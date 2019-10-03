@@ -4,10 +4,6 @@ import model.Caixinha;
 import controller.Movimentos;
 import arquivo.Arquivos;
 
-//TO-DO
-//Fazer desfazer etapa
-//Fazer refazer etapa
-
 /*
 * Criado Por: 
 * Marcos Junior - 18720920
@@ -233,6 +229,7 @@ public class Jogo2048 extends JPanel {
             System.out.println("Impossível lidar com teclado, falha de sistema");
         }
     }
+    
     public void troca(Caixinha[][] a, Caixinha[][] b, int func){
         Caixinha swap;
         for (int linha = 0; linha < tam; linha++) {
@@ -249,6 +246,7 @@ public class Jogo2048 extends JPanel {
             }
         }
     }
+
     public void printaGradeDeCaixinhas(Graphics2D g) throws IOException {
         // Desenha o container e o cabecalho
         g.setColor(caixaCor);
