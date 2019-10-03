@@ -7,7 +7,9 @@ public class Caixinha {
     public Caixinha(int val) {
         valor = val;
     }
-
+    public void Caixinha(int val){
+        valor = val;
+    }
     public int pegaValor() {
         return valor;
     }
