@@ -1,0 +1,130 @@
+[33mcommit 2683c881f128c4edaed1e9ca7483a0bca14bc76b[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: MarcosJr1 <marcosjr.vcs@gmail.com>
+Date:   Thu Oct 3 01:49:26 2019 -0300
+
+    Highscore addition
+
+[33mcommit 7f64d927a028c233fbba65e74cd634969aa40874[m
+Author: Marcos Junior <49346926+MarcosJr1@users.noreply.github.com>
+Date:   Thu Oct 3 01:36:32 2019 -0300
+
+    Update README.md
+
+[33mcommit c1075ed9d4e277f7da6847c98a363bc0c49449f5[m
+Author: Marcos Junior <49346926+MarcosJr1@users.noreply.github.com>
+Date:   Thu Oct 3 01:35:59 2019 -0300
+
+    Interface de testes
+
+[33mcommit 8611a1f36bd9e40176fe02c733bbd2ddf7fa5369[m
+Author: Marcos Junior <49346926+MarcosJr1@users.noreply.github.com>
+Date:   Thu Oct 3 01:21:02 2019 -0300
+
+    dicas sobre os controles do game
+
+[33mcommit 10f4ee49ff31874d7d227aa97dd4b5f01178a25d[m
+Author: Marcos Junior <49346926+MarcosJr1@users.noreply.github.com>
+Date:   Thu Oct 3 01:09:07 2019 -0300
+
+    Ensinando ver os arquivos
+
+[33mcommit a1ce334f1c6f803b3e7a22b1ee9c9567992c74fd[m
+Author: Marcos Junior <49346926+MarcosJr1@users.noreply.github.com>
+Date:   Thu Oct 3 01:02:01 2019 -0300
+
+    .
+
+[33mcommit e2136c9d9125dd44e48558480c45482e559b5b35[m
+Author: Marcos Junior <49346926+MarcosJr1@users.noreply.github.com>
+Date:   Thu Oct 3 01:01:28 2019 -0300
+
+    testes com readme
+
+[33mcommit e37780e0c15b10960c23d817e4622e9b872d4db6[m
+Author: Marcos Junior <49346926+MarcosJr1@users.noreply.github.com>
+Date:   Thu Oct 3 00:39:35 2019 -0300
+
+    update new details
+
+[33mcommit 18cf66d1ab5e70256bc20750ad1812dba323557d[m
+Merge: c4011b0 22312ae
+Author: MarcosJr1 <marcosjr.vcs@gmail.com>
+Date:   Thu Oct 3 00:33:11 2019 -0300
+
+    Merge branch 'master' of https://github.com/MarcosJr1/Java_2048
+
+[33mcommit c4011b091d26687640dbaeec6bc632c6d40cd65a[m
+Author: MarcosJr1 <marcosjr.vcs@gmail.com>
+Date:   Thu Oct 3 00:30:23 2019 -0300
+
+    Atualização da branch de desenvovimento
+
+[33mcommit 22312aef40823c33201272089b3f2698055b096e[m
+Author: hiagomoa <54142434+hiagomoa@users.noreply.github.com>
+Date:   Wed Oct 2 22:56:01 2019 -0300
+
+    Upload do pacote de movimentos
+    
+    Implementação da leitura de movimentos do teclado
+
+[33mcommit f189a48efed453e8808fb649e221198eedfde847[m
+Author: Marcos Junior <49346926+MarcosJr1@users.noreply.github.com>
+Date:   Wed Oct 2 22:39:22 2019 -0300
+
+    update new
+
+[33mcommit 0bef4358de376c443fc7215c16bd43f449f811a7[m
+Author: Marcos Junior <49346926+MarcosJr1@users.noreply.github.com>
+Date:   Wed Oct 2 22:38:47 2019 -0300
+
+    initial commit readme
+
+[33mcommit c9145644f5d1119483cd49e7bc5fd7772ea867f4[m
+Author: MarcosJr1 <marcosjr.vcs@gmail.com>
+Date:   Wed Oct 2 22:32:17 2019 -0300
+
+    Readme alterado para detalhar o prjeto
+
+[33mcommit 1908bcc08f99dc8f4879fc35ebd0409402c3ef0a[m
+Author: MarcosJr1 <marcosjr.vcs@gmail.com>
+Date:   Wed Oct 2 22:30:28 2019 -0300
+
+    arquivos de build da aplicação
+
+[33mcommit 4663902cee93c8eb95a3b8f87744b7f187f06e21[m
+Author: MarcosJr1 <marcosjr.vcs@gmail.com>
+Date:   Wed Oct 2 22:27:20 2019 -0300
+
+    Classes adicionais
+
+[33mcommit 0d97df1ac2e5d36e12d4c27984b32912700888a0[m
+Author: hiagomoa <54142434+hiagomoa@users.noreply.github.com>
+Date:   Wed Oct 2 13:19:29 2019 -0300
+
+    Classe de arquivos
+
+[33mcommit 8ec73c120a052022582c5730d4df6104a8d042f2[m
+Author: MarcosJr1 <marcosjr.vcs@gmail.com>
+Date:   Tue Sep 24 00:18:57 2019 -0300
+
+    Arquivos de imagem (tiles box) feitos no photoshop
+
+[33mcommit ab678093a8f3b29851670c0e9f4b1dfe202735c8[m
+Author: MarcosJr1 <marcosjr.vcs@gmail.com>
+Date:   Tue Sep 24 00:17:56 2019 -0300
+
+    Arquivos de imagem (tiles box) feitos no photoshop
+
+[33mcommit cbbf0e29e4185bbcf3726a33e879ad2f1dcdcbfd[m
+Author: hiagomoa <54142434+hiagomoa@users.noreply.github.com>
+Date:   Mon Sep 23 17:58:51 2019 -0300
+
+    Teste Arrays
+    
+    Primeiros teste com arrays.
+
+[33mcommit a7daa81982c9bf9c85d056a903d16e4b9852189a[m
+Author: Marcos Junior <49346926+MarcosJr1@users.noreply.github.com>
+Date:   Mon Sep 23 15:23:18 2019 -0300
+
+    Initial commit
