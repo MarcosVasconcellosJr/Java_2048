@@ -11,7 +11,6 @@ Este programa é uma cópia barata do jogo 2048, cuja finalidade é juntar pares
 * Caso haja alguma dependência não resolvida como path, consulte os tutoriais: 
 * [Instalar Netbeans](https://www.youtube.com/watch?v=goFd0W3CvGI) - Linux
 * [Instalar Netbeans](https://www.youtube.com/watch?v=YJIxL84EQg8) - Windows
-* Ou a documentação
 * [Java](https://www.oracle.com/technetwork/pt/java/javase/documentation/index.html) - Documentação
 
 ### Download
