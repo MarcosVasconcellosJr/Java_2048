@@ -40,7 +40,9 @@ import static sun.security.krb5.Confounder.bytes;
 // Classe principal que declara as variáveis do 
 // programa e chama outras classes e métodos
 public class Jogo2048 extends JPanel {
+    
     String arq = "src\\assets\\maximumhighScore.txt";
+    
     final Color[] tabelaDeCores = {new Color(0x701710), new Color(0xFFE4C3), new Color(0xfff4d3), new Color(0xffdac3),
         new Color(0xE7B08E), new Color(0xE7BF8E), new Color(0xffc4c3), new Color(0xE7948e), new Color(0xbe7e56),
         new Color(0xbe5e56), new Color(0x9c3931), new Color(0x701710)}; // Cores usadas
@@ -134,9 +136,9 @@ public class Jogo2048 extends JPanel {
                     case KeyEvent.VK_ESCAPE:
                         statusDoJogo = "inicio";
                         break;
-                    case KeyEvent.VK_X:
-                        caixinha[2][3].Caixinha(1024);
-                        caixinha[2][1].Caixinha(1024);
+                    case KeyEvent.VK_P:
+                        addCaixinhaRandomica(512);
+                        addCaixinhaRandomica(512);
                         repaint();
                         break;
                 }
@@ -397,6 +399,30 @@ public class Jogo2048 extends JPanel {
                     caixinha[n][n1] = new Caixinha(2);
                 } else if (valorRand == 1) {
                     caixinha[n][n1] = new Caixinha(4);
+                }
+                flag = 1;
+            } else {
+                maxInteracoes += 1;
+            }
+        } while (flag == 0 && maxInteracoes <= 16);
+    }
+
+    public void addCaixinhaRandomica(int a) {
+
+        Random rand = new Random();// Cria a váriavel Randômica
+        int flag = 0;// Setamos como 1 a flag e assim o do while para seu processo
+        int maxInteracoes = 0;// Controlamos o (do while) para que ele não entre em um loop infinito
+
+        do {
+            int n = rand.nextInt(4);// seta um número aleatorio entre 0 e 3 para o N(nsera a posição na matriz)
+            int n1 = rand.nextInt(4);// seta outro número para a posição na matriz
+            int valorRand = rand.nextInt(2);// Gera 1 ou 0 para escolher se o número que aparecera sera 2 ou 4
+
+            if (caixinha[n][n1] == null) {
+                if (valorRand == 0) {
+                    caixinha[n][n1] = new Caixinha(a);
+                } else if (valorRand == 1) {
+                    caixinha[n][n1] = new Caixinha(a);
                 }
                 flag = 1;
             } else {
