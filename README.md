@@ -1,4 +1,4 @@
-# Manual - Java_2048 By Hiago e Marcos
+# Manual Jogo 2048 By Hiago e Marcos
 
 Este programa é uma cópia barata do jogo 2048, cuja finalidade é juntar pares de valores iguais a fim de somar um quadrado de valor = 2048
 
@@ -23,26 +23,13 @@ git clone https://github.com/MarcosJr1/Java_2048.git
 
 ### Como ver os arquivos?
 
+* No windows
 ```
-Give the example
+cd Java_2048
+dir
 ```
-
-And repeat
-
+* No linux
 ```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+cd Java_2048
+ls
 ```
