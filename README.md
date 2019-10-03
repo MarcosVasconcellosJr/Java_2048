@@ -54,4 +54,8 @@ Relativo a usabilidade do aplicativo desktop
 * Clicar, Arrastar e soltar o mouse geram movimentos em todas as direções
 
 ### Interface do Usuário
-*Highscore máximo do jogo
+* Highscore máximo do jogo
+* Score atual do jogador
+* Blocos animados com gifs
+* Feedback de vitória
+* Botôes clicáveis de desfazer movimento e refazer movimento
